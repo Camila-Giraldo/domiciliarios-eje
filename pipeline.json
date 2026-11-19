@@ -1,0 +1,15 @@
+{
+  "version": 1,
+  "actualizado": null,
+  "mvp": {
+    "estado": "borrador",
+    "ronda": 0,
+    "aprobado_por": null,
+    "hash_specs": null,
+    "archivo": "docs/mvp.md"
+  },
+  "modulos": {},
+  "iteraciones": {},
+  "escalados": [],
+  "historial": []
+}

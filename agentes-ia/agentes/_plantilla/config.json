@@ -1,0 +1,13 @@
+{
+  "nombre": "Nombre legible del agente",
+  "descripcion": "Qué hace el agente en una frase.",
+  "proveedor": "gemini",
+  "modelo": "gemini-3.5-flash",
+  "modelos_respaldo": ["gemini-3.7-flash", "gemini-3.6-flash"],
+  "parametros": {
+    "temperature": 0.4,
+    "top_p": 0.95,
+    "max_tokens": 8192
+  },
+  "skills": []
+}

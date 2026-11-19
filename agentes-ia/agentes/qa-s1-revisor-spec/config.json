@@ -1,0 +1,19 @@
+{
+  "nombre": "QA S1 Revisor de SPEC",
+  "descripcion": "S1: prueba estática de una SPEC con veredicto APTA, APTA_CON_RESERVAS o NO_APTA.",
+  "proveedor": "openrouter",
+  "modelo": "nvidia/nemotron-3-nano-omni-30b-a3b-reasoning:free",
+  "modelos_respaldo": [
+    "openrouter/free"
+  ],
+  "parametros": {
+    "temperature": 0.4,
+    "top_p": 0.95,
+    "max_tokens": 32000
+  },
+  "skills": [
+    "criterios-calidad-de-spec",
+    "formato-de-hallazgos",
+    "manejo-de-ambiguedades"
+  ]
+}

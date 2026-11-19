@@ -1,0 +1,20 @@
+{
+  "nombre": "B2 Bot de Telegram",
+  "descripcion": "B2: implementa el canal conversacional (bot de mensajería) llamando solo a la API de los módulos.",
+  "proveedor": "gemini",
+  "modelo": "gemini-3.5-flash",
+  "modelos_respaldo": [
+    "gemini-3.7-flash",
+    "gemini-3.6-flash"
+  ],
+  "parametros": {
+    "temperature": 0.3,
+    "top_p": 0.95,
+    "max_tokens": 32000
+  },
+  "skills": [
+    "canal-conversacional",
+    "plantillas-sin-datos-sensibles",
+    "manejo-de-ambiguedades"
+  ]
+}

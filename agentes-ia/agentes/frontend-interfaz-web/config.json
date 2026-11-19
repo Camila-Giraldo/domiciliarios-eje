@@ -1,0 +1,21 @@
+{
+  "nombre": "B3 Interfaz web",
+  "descripcion": "B3: implementa la interfaz gráfica (web, PWA o Mini App) con cliente tipado de la API.",
+  "proveedor": "gemini",
+  "modelo": "gemini-3.5-flash",
+  "modelos_respaldo": [
+    "gemini-3.7-flash",
+    "gemini-3.6-flash"
+  ],
+  "parametros": {
+    "temperature": 0.3,
+    "top_p": 0.95,
+    "max_tokens": 32000
+  },
+  "skills": [
+    "cliente-api-tipado",
+    "componentes-ui",
+    "formularios",
+    "plantillas-sin-datos-sensibles"
+  ]
+}

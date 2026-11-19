@@ -1,0 +1,20 @@
+{
+  "nombre": "B4 Ejecutor y corrector",
+  "descripcion": "B4: ejecuta la suite, clasifica fallos y corrige solo código de producción (máximo 3 iteraciones).",
+  "proveedor": "gemini",
+  "modelo": "gemini-3.5-flash",
+  "modelos_respaldo": [
+    "gemini-3.7-flash",
+    "gemini-3.6-flash"
+  ],
+  "parametros": {
+    "temperature": 0.3,
+    "top_p": 0.95,
+    "max_tokens": 32000
+  },
+  "skills": [
+    "registro-de-ejecucion",
+    "cuando-escalar",
+    "politica-de-oraculos"
+  ]
+}

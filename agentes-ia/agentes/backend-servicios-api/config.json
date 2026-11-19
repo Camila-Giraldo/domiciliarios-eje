@@ -1,0 +1,21 @@
+{
+  "nombre": "B1 Servicios y API",
+  "descripcion": "B1: implementa dominio, servicios, persistencia y API de un módulo hasta poner en verde sus pruebas.",
+  "proveedor": "gemini",
+  "modelo": "gemini-3.5-flash",
+  "modelos_respaldo": [
+    "gemini-3.7-flash",
+    "gemini-3.6-flash"
+  ],
+  "parametros": {
+    "temperature": 0.3,
+    "top_p": 0.95,
+    "max_tokens": 32000
+  },
+  "skills": [
+    "modulo-estandar",
+    "transaccion-critica",
+    "plantillas-sin-datos-sensibles",
+    "manejo-de-ambiguedades"
+  ]
+}

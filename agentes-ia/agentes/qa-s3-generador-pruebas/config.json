@@ -1,0 +1,22 @@
+{
+  "nombre": "QA S3 Generador de pruebas",
+  "descripcion": "S3: convierte los TC aprobados en pruebas ejecutables que fallan primero.",
+  "proveedor": "gemini",
+  "modelo": "gemini-3.5-flash",
+  "modelos_respaldo": [
+    "gemini-3.7-flash",
+    "gemini-3.6-flash",
+    "gemini-3.5-flash-lite"
+  ],
+  "parametros": {
+    "temperature": 0.3,
+    "top_p": 0.95,
+    "max_tokens": 32000
+  },
+  "skills": [
+    "plantilla-pruebas",
+    "politica-de-oraculos",
+    "matriz-de-trazabilidad",
+    "plantilla-humo"
+  ]
+}

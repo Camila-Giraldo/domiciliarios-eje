@@ -1,0 +1,18 @@
+{
+  "nombre": "QA S2 Diseñador de casos",
+  "descripcion": "S2: deriva casos TC-* de cada AC del MVP y asigna el oráculo según el origen del dato.",
+  "proveedor": "gemini",
+  "modelo": "gemini-3.8-flash",
+  "modelos_respaldo": [],
+  "parametros": {
+    "temperature": 0.3,
+    "top_p": 0.95,
+    "max_tokens": 32000
+  },
+  "skills": [
+    "tecnicas-de-diseno-de-casos",
+    "politica-de-oraculos",
+    "matriz-de-trazabilidad",
+    "manejo-de-ambiguedades"
+  ]
+}

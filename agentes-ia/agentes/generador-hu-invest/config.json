@@ -1,0 +1,14 @@
+{
+  "nombre": "Generador de historias de usuario (INVEST)",
+  "descripcion": "Genera historias de usuario desde cero para el proyecto configurado y las autoevalúa con el criterio INVEST.",
+  "proveedor": "gemini",
+  "modelo": "gemini-3.5-flash",
+  "modelos_respaldo": ["gemini-3.7-flash", "gemini-3.6-flash"],
+  "parametros": {
+    "temperature": 0.5,
+    "top_p": 0.95,
+    "max_tokens": 16000
+  },
+  "codigo_salida": "HU",
+  "skills": []
+}

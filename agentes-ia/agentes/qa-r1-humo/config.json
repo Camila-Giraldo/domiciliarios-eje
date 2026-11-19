@@ -1,0 +1,20 @@
+{
+  "nombre": "R1 Pruebas de humo",
+  "descripcion": "R1: recorre los caminos felices del MVP contra el entorno desplegado.",
+  "proveedor": "groq",
+  "modelo": "openai/gpt-oss-120b",
+  "modelos_respaldo": [
+    "openai/gpt-oss-20b",
+    "qwen/qwen3.8-27b"
+  ],
+  "parametros": {
+    "temperature": 0.3,
+    "top_p": 0.95,
+    "max_tokens": 32000
+  },
+  "skills": [
+    "plantilla-humo",
+    "formato-de-hallazgos",
+    "registro-de-ejecucion"
+  ]
+}
