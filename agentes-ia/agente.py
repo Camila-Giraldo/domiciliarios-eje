@@ -108,7 +108,8 @@ def guardar_resultado(config, nombre_agente, peticion, respuesta):
     carpeta.mkdir(parents=True, exist_ok=True)
 
     fecha = datetime.now()
-    resumen = re.sub(r"[^a-z0-9]+", "-", peticion.lower())[:40].strip("-") or "resultado"
+    # Nombre en inglés y en ASCII: etiqueta fija del agente + identificadores de la petición.
+    resumen = PROYECTO_PY.nombre_salida(config.get("archivo_salida") or nombre_agente, peticion)
     codigo = config.get("codigo_salida") or CODIGOS_AGENTE.get(nombre_agente, nombre_agente.upper()[:3])
     existentes = [a for a in carpeta.glob(f"{codigo}-*.md")]
     contador = len(existentes) + 1
@@ -117,7 +118,7 @@ def guardar_resultado(config, nombre_agente, peticion, respuesta):
     encabezado = (
         f"<!--\n"
         f"Agente: {config.get('nombre', nombre_agente)}\n"
-        f"Proveedor: {config.get('proveedor', PROVEEDOR_POR_DEFECTO)}\n"
+        f"Proveedor: {config.get('proveedor_usado') or config.get('proveedor', PROVEEDOR_POR_DEFECTO)}\n"
         f"Modelo: {config['modelo']}\n"
         f"Fecha: {fecha:%Y-%m-%d %H:%M}\n"
         f"Petición: {peticion}\n"
@@ -249,7 +250,7 @@ def guardar_spec(config, nombre_agente, peticion, respuesta, modelo, cortada):
     encabezado = (
         f"<!--\n"
         f"Agente: {config.get('nombre', nombre_agente)}\n"
-        f"Proveedor: {config.get('proveedor', PROVEEDOR_POR_DEFECTO)}\n"
+        f"Proveedor: {config.get('proveedor_usado') or config.get('proveedor', PROVEEDOR_POR_DEFECTO)}\n"
         f"Modelo: {modelo}\n"
         f"Fecha: {fecha:%Y-%m-%d %H:%M}\n"
         f"Petición: {peticion}\n"
@@ -386,28 +387,77 @@ def listar_modelos(nombre_proveedor):
 # ---------------------------------------------------------------------------
 
 
+def respaldo_entre_proveedores_activo():
+    """Interruptor del proyecto (proyecto.json → ia.respaldo_entre_proveedores). Apagado por defecto."""
+    return bool(PROYECTO.get("ia", {}).get("respaldo_entre_proveedores"))
+
+
+def cadena_de_respaldo(config, nombre_proveedor, entre_proveedores=None):
+    """Orden de intentos: [(proveedor, modelo), ...].
+
+    Primero el modelo principal y los «modelos_respaldo» del mismo proveedor. Si el proyecto
+    activa el respaldo entre proveedores, siguen los «proveedores_respaldo» del config.json del
+    agente, en orden: [{"proveedor": "openrouter", "modelos": ["openrouter/free"]}].
+    """
+    if entre_proveedores is None:
+        entre_proveedores = respaldo_entre_proveedores_activo()
+    cadena = [(nombre_proveedor, m) for m in [config["modelo"]] + list(config.get("modelos_respaldo", []))]
+    if entre_proveedores:
+        for respaldo in config.get("proveedores_respaldo", []):
+            proveedor = respaldo.get("proveedor")
+            if proveedor and proveedor != nombre_proveedor and proveedor in PROVEEDORES:
+                cadena += [(proveedor, m) for m in respaldo.get("modelos", [])]
+    return list(dict.fromkeys(cadena))
+
+
 def llamar(cliente, config, mensajes, nombre_proveedor):
-    """Una llamada al modelo. Si está saturado o sin cupo, prueba los de respaldo."""
+    """Una llamada al modelo. Si está saturado o sin cupo, prueba los de respaldo.
+
+    Deja en config el modelo y el proveedor que respondieron («modelo» y «proveedor_usado»),
+    para que el archivo guardado y la evidencia registren lo que de verdad se usó.
+    """
     from openai import APIError
 
-    modelos = [config["modelo"]] + config.get("modelos_respaldo", [])
-    for posicion, modelo in enumerate(modelos):
+    cadena = cadena_de_respaldo(config, nombre_proveedor)
+    clientes = {nombre_proveedor: cliente}
+    ultimo_error = None
+    for posicion, (proveedor, modelo) in enumerate(cadena):
+        siguiente = cadena[posicion + 1] if posicion < len(cadena) - 1 else None
+        if proveedor not in clientes:
+            try:
+                clientes[proveedor] = crear_cliente(proveedor)
+            except SystemExit as error:  # falta la llave o la librería de ese proveedor
+                print(f"Aviso: no se puede usar {proveedor} ({error}). Se omite.\n")
+                clientes[proveedor] = None
+        if clientes[proveedor] is None:
+            continue
         try:
-            completado = cliente.chat.completions.create(
+            completado = clientes[proveedor].chat.completions.create(
                 model=modelo, messages=mensajes, **config.get("parametros", {})
             )
             config["modelo"] = modelo
+            config["proveedor_usado"] = proveedor
+            if proveedor != nombre_proveedor:
+                print(f"Aviso: respondió el proveedor de respaldo {proveedor} ({modelo}).\n")
             return completado
         except APIError as error:
+            ultimo_error = error
             estado = getattr(error, "status_code", None)
-            if estado in ESTADOS_CON_RESPALDO and posicion < len(modelos) - 1:
+            if estado in ESTADOS_CON_RESPALDO and siguiente:
                 print(
-                    f"Aviso: {modelo} no está disponible (error {estado}). "
-                    f"Probando con {modelos[posicion + 1]}...\n"
+                    f"Aviso: {modelo} ({proveedor}) no está disponible (error {estado}). "
+                    f"Probando con {siguiente[1]} ({siguiente[0]})...\n"
                 )
                 continue
             # Muestra el error en una sola línea en lugar de la traza completa de Python.
-            sys.exit(f"Error de la API ({nombre_proveedor}): {error}")
+            sys.exit(f"Error de la API ({proveedor}): {error}")
+    sys.exit(f"Error de la API: ningún modelo de respaldo respondió ({ultimo_error}).")
+
+
+def modelo_registrado(config, nombre_proveedor):
+    """Texto del modelo para encabezados y evidencias; agrega el proveedor si fue uno de respaldo."""
+    usado = config.get("proveedor_usado") or nombre_proveedor
+    return config["modelo"] if usado == nombre_proveedor else f"{config['modelo']} ({usado})"
 
 
 def avisar(completado, fase=None):
@@ -882,7 +932,7 @@ def main():
 
     if not args.no_guardar:
         if por_spec:
-            archivo = guardar_spec(config, args.agente, peticion, respuesta, config["modelo"], cortada)
+            archivo = guardar_spec(config, args.agente, peticion, respuesta, modelo_registrado(config, nombre_proveedor), cortada)
             if cortada:
                 print("Se guardó marcada como INCOMPLETA: --continuar no la usará como adjunto.")
             print(f"Guardada: {relativa(archivo)}")
@@ -894,7 +944,7 @@ def main():
         estado = f" ({datos[0]} v{datos[2]}, {datos[3]})" if datos else ""
         contexto = ", ".join(str(relativa(a)) for a in adjuntos) or "solo el contexto del proyecto"
         evidencias = PROYECTO_PY.registrar_evidencia(
-            PROYECTO, args.agente, config["modelo"], peticion,
+            PROYECTO, args.agente, modelo_registrado(config, nombre_proveedor), peticion,
             f"{PROYECTO['archivo_contexto']}; adjuntos: {contexto}",
             f"{relativa(archivo)}{estado}{' INCOMPLETA' if cortada else ''}",
         )

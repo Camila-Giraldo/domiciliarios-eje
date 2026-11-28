@@ -14,5 +14,15 @@
   },
   "skills": [
     "formato-de-hallazgos"
+  ],
+  "archivo_salida": "triage",
+  "proveedores_respaldo": [
+    {
+      "proveedor": "gemini",
+      "modelos": [
+        "gemini-3.5-flash",
+        "gemini-3.7-flash"
+      ]
+    }
   ]
 }

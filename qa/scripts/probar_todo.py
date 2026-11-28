@@ -129,6 +129,20 @@ def main() -> int:
         r = correr([sys.executable, "qa/scripts/guardian.py", "verificar"], raiz)
         caso("guardián detecta una prueba modificada", r.returncode == 1 and "modificado" in r.stdout, r.stdout.strip()[-200:])
 
+        # 5b. respaldo entre proveedores
+        agente_mod = cargar("agente_kit", raiz / "agentes-ia" / "agente.py")
+        cfg = {"modelo": "m1", "modelos_respaldo": ["m2"],
+               "proveedores_respaldo": [{"proveedor": "openrouter", "modelos": ["r1"]}]}
+        apagado = agente_mod.cadena_de_respaldo(cfg, "gemini", entre_proveedores=False)
+        encendido = agente_mod.cadena_de_respaldo(cfg, "gemini", entre_proveedores=True)
+        caso("respaldo entre proveedores apagado por defecto",
+             not agente_mod.respaldo_entre_proveedores_activo() and apagado == [("gemini", "m1"), ("gemini", "m2")],
+             str(apagado))
+        caso("respaldo entre proveedores al activarlo",
+             encendido == [("gemini", "m1"), ("gemini", "m2"), ("openrouter", "r1")], str(encendido))
+        caso("evidencia registra el proveedor de respaldo",
+             agente_mod.modelo_registrado({"modelo": "r1", "proveedor_usado": "openrouter"}, "gemini") == "r1 (openrouter)")
+
         # 6. evidencias
         ruta = proyecto_py.registrar_evidencia(proyecto, "specification-agent", "modelo-x", "tarea de prueba",
                                                "contexto", "resultado")

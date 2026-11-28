@@ -19,5 +19,14 @@
   "skills": [
     "negociacion-de-mvp",
     "manejo-de-ambiguedades"
+  ],
+  "archivo_salida": "spec",
+  "proveedores_respaldo": [
+    {
+      "proveedor": "openrouter",
+      "modelos": [
+        "openrouter/free"
+      ]
+    }
   ]
 }

@@ -18,5 +18,14 @@
     "politica-de-oraculos",
     "matriz-de-trazabilidad",
     "plantilla-humo"
+  ],
+  "archivo_salida": "test-generation",
+  "proveedores_respaldo": [
+    {
+      "proveedor": "openrouter",
+      "modelos": [
+        "openrouter/free"
+      ]
+    }
   ]
 }

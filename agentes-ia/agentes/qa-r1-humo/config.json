@@ -16,5 +16,15 @@
     "plantilla-humo",
     "formato-de-hallazgos",
     "registro-de-ejecucion"
+  ],
+  "archivo_salida": "smoke",
+  "proveedores_respaldo": [
+    {
+      "proveedor": "gemini",
+      "modelos": [
+        "gemini-3.5-flash",
+        "gemini-3.7-flash"
+      ]
+    }
   ]
 }

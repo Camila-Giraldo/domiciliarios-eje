@@ -98,6 +98,16 @@ Cada ejecución agrega una fila a `docs/evidencias-ia.md` (agente, modelo, tarea
 
 En el `config.json` del agente: `proveedor` (`gemini`, `mistral`, `groq`, `openrouter`), `modelo` y `modelos_respaldo` (se prueban en orden ante errores 429 y 5xx). `python agentes-ia/agente.py --modelos gemini` lista los modelos de un proveedor. En el pipeline, `MODELO_S1`, `MODELO_B1`… en `.env` sobrescriben el modelo de un paso.
 
+## Respaldo entre proveedores
+
+Si el proveedor principal se queda sin cupo (429) o saturado (5xx) en todos sus modelos, el runtime puede pasar a otro proveedor. Está **apagado por defecto** para que todas las salidas de un proyecto usen el mismo modelo.
+
+- Interruptor del proyecto, en `proyecto.json`: `"ia": {"respaldo_entre_proveedores": true}`.
+- Orden de intentos, en el `config.json` de cada agente: `"proveedores_respaldo": [{"proveedor": "openrouter", "modelos": ["openrouter/free"]}]`.
+- Necesita la llave de ese proveedor en `.env`; si falta, se omite con un aviso.
+- El archivo guardado y la evidencia registran el proveedor que de verdad respondió, por ejemplo `openrouter/free (openrouter)`, para que la validación humana lo tenga en cuenta.
+- Groq rechaza solicitudes de más de 8.000 tokens: no sirve como respaldo de los agentes con contexto largo.
+
 ## Crear un agente nuevo
 
 1. Copia `agentes/_plantilla/` con el nombre del agente.

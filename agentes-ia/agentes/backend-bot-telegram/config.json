@@ -16,5 +16,14 @@
     "canal-conversacional",
     "plantillas-sin-datos-sensibles",
     "manejo-de-ambiguedades"
+  ],
+  "archivo_salida": "chat-channel",
+  "proveedores_respaldo": [
+    {
+      "proveedor": "openrouter",
+      "modelos": [
+        "openrouter/free"
+      ]
+    }
   ]
 }

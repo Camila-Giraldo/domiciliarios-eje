@@ -71,6 +71,7 @@ POR_DEFECTO: dict = {
     "datos_sensibles": [],
     "reglas_criticas": [],
     "evidencias": "docs/evidencias-ia.md",
+    "ia": {"respaldo_entre_proveedores": False},
 }
 
 OBLIGATORIOS = ["nombre", "archivo_contexto"]
@@ -278,6 +279,27 @@ def reemplazar(texto: str, proyecto: dict, skills: list[str] | None = None) -> s
     if sobrantes:
         sys.exit(f"Marcadores sin valor en el prompt: {', '.join(sobrantes)}")
     return texto
+
+
+# --------------------------------------------------------- nombres de archivo
+
+def slug(texto: str, limite: int = 40) -> str:
+    """Convierte un texto en un fragmento de nombre de archivo ASCII: sin tildes, ñ ni espacios."""
+    import unicodedata
+
+    ascii_ = unicodedata.normalize("NFKD", str(texto)).encode("ascii", "ignore").decode("ascii")
+    return re.sub(r"[^a-z0-9]+", "-", ascii_.lower())[:limite].strip("-")
+
+
+def nombre_salida(etiqueta: str, peticion: str) -> str:
+    """Parte descriptiva del nombre de una salida: etiqueta fija en inglés + identificadores de la petición.
+
+    Ejemplo: etiqueta «user-stories» y petición «Épica EPIC-001: …» → «user-stories_epic-001».
+    Si la petición no trae identificadores (EPIC-001, SPEC-002, HU-03…), solo se usa la etiqueta.
+    """
+    ids = list(dict.fromkeys(re.findall(r"\b[A-Z]{2,5}-\d{2,3}\b", peticion)))[:3]
+    partes = [slug(etiqueta) or "output"] + [slug(i) for i in ids]
+    return "_".join(p for p in partes if p)
 
 
 # --------------------------------------------------------------- evidencias

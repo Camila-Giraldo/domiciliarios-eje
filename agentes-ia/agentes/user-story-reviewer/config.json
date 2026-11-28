@@ -3,12 +3,24 @@
   "descripcion": "Revisa y corrige historias de usuario existentes contra INVEST y el contexto del proyecto.",
   "proveedor": "gemini",
   "modelo": "gemini-3.5-flash",
-  "modelos_respaldo": ["gemini-3.7-flash", "gemini-3.6-flash"],
+  "modelos_respaldo": [
+    "gemini-3.7-flash",
+    "gemini-3.6-flash"
+  ],
   "parametros": {
     "temperature": 0.3,
     "top_p": 0.95,
     "max_tokens": 16000
   },
   "codigo_salida": "RHU",
-  "skills": []
+  "skills": [],
+  "archivo_salida": "story-review",
+  "proveedores_respaldo": [
+    {
+      "proveedor": "openrouter",
+      "modelos": [
+        "openrouter/free"
+      ]
+    }
+  ]
 }

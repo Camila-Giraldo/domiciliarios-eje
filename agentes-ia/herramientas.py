@@ -352,23 +352,32 @@ def ejecutar_paso(paso: str, modulo: str, tarea: str, modelo: str | None = None,
     config = {
         "modelo": modelo or propio.get("modelo") or os.environ.get("MODELO_API") or MODELO_POR_DEFECTO,
         "modelos_respaldo": respaldo,
+        "proveedores_respaldo": propio.get("proveedores_respaldo", []),
         "parametros": {"temperature": 0.2, **parametros, "tools": HERRAMIENTAS, "tool_choice": "auto"},
     }
     cliente = agente.crear_cliente(proveedor)
     carpeta = RAIZ_PROYECTO / "qa" / "ejecuciones"
     carpeta.mkdir(parents=True, exist_ok=True)
-    nombre = f"api-{paso.replace('/', '-')}-{modulo}-{datetime.now():%Y%m%d-%H%M%S}.jsonl"
+    nombre = f"api-{paso.replace('/', '-')}-{PROYECTO_PY.slug(modulo) or 'module'}-{datetime.now():%Y%m%d-%H%M%S}.jsonl"
     with (carpeta / nombre).open("w", encoding="utf-8") as registro:
         # Cada paso vuelve a intentar el modelo principal: agente.llamar cambia el modelo de la
         # configuración al de respaldo que funcionó, y sin esto ya no se volvería al principal.
         principal = config["modelo"]
-        ejecutor = Ejecutor(paso, cliente=cliente, config=config, registro=registro,
-                            llamar=lambda c, cfg, m: agente.llamar(c, dict(cfg, modelo=principal), m, proveedor))
+        usado = {"modelo": principal}
+
+        def _llamar(c, cfg, m):
+            copia = dict(cfg, modelo=principal)
+            respuesta = agente.llamar(c, copia, m, proveedor)
+            usado.update(modelo=copia["modelo"], proveedor_usado=copia.get("proveedor_usado"))
+            return respuesta
+
+        ejecutor = Ejecutor(paso, cliente=cliente, config=config, registro=registro, llamar=_llamar)
         codigo, resumen = ejecutor.correr(mensajes_iniciales(paso, tarea))
-    salida(f"[api] {paso} {modulo}: código {codigo} con {config['modelo']} ({proveedor}). Registro: qa/ejecuciones/{nombre}")
+    modelo_usado = agente.modelo_registrado(usado, proveedor)
+    salida(f"[api] {paso} {modulo}: código {codigo} con {modelo_usado} ({proveedor}). Registro: qa/ejecuciones/{nombre}")
     salida(resumen)
     PROYECTO_PY.registrar_evidencia(
-        PROYECTO, f"{POLITICAS[paso]['agente']} ({paso})", config["modelo"], tarea.splitlines()[-1] if tarea else paso,
+        PROYECTO, f"{POLITICAS[paso]['agente']} ({paso})", modelo_usado, tarea.splitlines()[-1] if tarea else paso,
         f"módulo {modulo}; {PROYECTO['archivo_contexto']}; skills: {', '.join(propio.get('skills', [])) or 'ninguno'}",
         f"código {codigo}; registro qa/ejecuciones/{nombre}; {resumen}",
     )

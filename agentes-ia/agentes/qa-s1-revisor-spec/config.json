@@ -15,5 +15,15 @@
     "criterios-calidad-de-spec",
     "formato-de-hallazgos",
     "manejo-de-ambiguedades"
+  ],
+  "archivo_salida": "spec-review",
+  "proveedores_respaldo": [
+    {
+      "proveedor": "gemini",
+      "modelos": [
+        "gemini-3.5-flash",
+        "gemini-3.7-flash"
+      ]
+    }
   ]
 }

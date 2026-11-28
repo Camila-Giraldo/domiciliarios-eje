@@ -14,5 +14,14 @@
     "politica-de-oraculos",
     "matriz-de-trazabilidad",
     "manejo-de-ambiguedades"
+  ],
+  "archivo_salida": "test-design",
+  "proveedores_respaldo": [
+    {
+      "proveedor": "openrouter",
+      "modelos": [
+        "openrouter/free"
+      ]
+    }
   ]
 }

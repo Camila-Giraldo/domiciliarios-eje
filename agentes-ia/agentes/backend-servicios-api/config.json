@@ -17,5 +17,14 @@
     "transaccion-critica",
     "plantillas-sin-datos-sensibles",
     "manejo-de-ambiguedades"
+  ],
+  "archivo_salida": "backend",
+  "proveedores_respaldo": [
+    {
+      "proveedor": "openrouter",
+      "modelos": [
+        "openrouter/free"
+      ]
+    }
   ]
 }

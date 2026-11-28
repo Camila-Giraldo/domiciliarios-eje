@@ -20,5 +20,14 @@
   "skills": [
     "negociacion-de-mvp",
     "transaccion-critica"
+  ],
+  "archivo_salida": "architecture",
+  "proveedores_respaldo": [
+    {
+      "proveedor": "openrouter",
+      "modelos": [
+        "openrouter/free"
+      ]
+    }
   ]
 }

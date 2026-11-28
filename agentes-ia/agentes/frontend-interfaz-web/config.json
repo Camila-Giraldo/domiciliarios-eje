@@ -17,5 +17,14 @@
     "componentes-ui",
     "formularios",
     "plantillas-sin-datos-sensibles"
+  ],
+  "archivo_salida": "frontend",
+  "proveedores_respaldo": [
+    {
+      "proveedor": "openrouter",
+      "modelos": [
+        "openrouter/free"
+      ]
+    }
   ]
 }

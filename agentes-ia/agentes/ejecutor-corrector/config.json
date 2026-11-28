@@ -16,5 +16,14 @@
     "registro-de-ejecucion",
     "cuando-escalar",
     "politica-de-oraculos"
+  ],
+  "archivo_salida": "fix-run",
+  "proveedores_respaldo": [
+    {
+      "proveedor": "openrouter",
+      "modelos": [
+        "openrouter/free"
+      ]
+    }
   ]
 }
