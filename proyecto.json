@@ -1,29 +1,52 @@
 {
-  "_ayuda": "Ejemplo: Domiciliarios Eje (Aplicativo 1, Ingeniería de Software III). El stack y los perfiles son una propuesta heredada del primer proyecto y siguen pendientes de aprobación.",
+  "_ayuda": "Domiciliarios Eje (Aplicativo 1, Ingeniería de Software III). El stack es una propuesta preferida por la estudiante; queda pendiente de formalizar en un ARQ con alternativas, matriz y ADR.",
   "nombre": "Domiciliarios Eje",
   "archivo_contexto": "CONTEXTO_PROYECTO.md",
   "idioma": "español de Colombia",
   "stack": {
     "documento": "docs/arquitectura/propuesta-tecnologica.md",
-    "resumen": "Propuesta pendiente de aprobación: TypeScript, NestJS, Prisma, PostgreSQL y grammY (bot de Telegram); Telegram Mini App con React solo si una funcionalidad lo necesita."
+    "resumen": "Propuesta preferida, pendiente de ADR: backend TypeScript + NestJS + Prisma + PostgreSQL; bot de Telegram con grammY (conversations y menús) como interfaz principal; ubicación del domiciliario con la ubicación en tiempo real nativa de Telegram; Telegram Mini App en React + Vite para el catálogo y el pedido (DEC-E47) y para el mapa de los domiciliarios con Leaflet y OpenStreetMap, alimentado por SSE desde el backend; pruebas con Jest + Testcontainers, updates simulados de grammY y Playwright para la Mini App; despliegue con HTTPS (webhook y Mini App)."
   },
-  "perfiles": ["nestjs-prisma", "telegram-grammy"],
-  "canales": ["telegram"],
+  "perfiles": [
+    "nestjs-prisma",
+    "telegram-grammy",
+    "react-web"
+  ],
+  "canales": [
+    "telegram"
+  ],
   "rutas": {
     "salidas": "agentes-ia/salidas",
-    "codigo": ["apps/*"],
-    "pruebas": ["*.spec.*", "*.test.*", "*/pruebas/*", "*/e2e/*"],
+    "codigo": [
+      "apps/*"
+    ],
+    "pruebas": [
+      "*.spec.*",
+      "*.test.*",
+      "*/pruebas/*",
+      "*/e2e/*"
+    ],
     "modulo": "apps/api/src/modulos/{carpeta}",
     "pruebas_modulo": "apps/api/src/modulos/{carpeta}/pruebas",
     "e2e": "apps/miniapp/e2e",
     "canal_conversacional": "apps/api/src/entradas/telegram",
     "interfaz": "apps/miniapp",
-    "extensiones_codigo": [".ts", ".tsx"],
+    "extensiones_codigo": [
+      ".ts",
+      ".tsx"
+    ],
     "skills_proyecto": "skills-proyecto"
   },
   "comandos": {
     "directorio": "apps/api",
-    "permitidos": ["npm test", "npm run test", "npx jest", "npx tsc", "npx prisma validate", "npx prisma generate"],
+    "permitidos": [
+      "npm test",
+      "npm run test",
+      "npx jest",
+      "npx tsc",
+      "npx prisma validate",
+      "npx prisma generate"
+    ],
     "pruebas_modulo": "npx jest {ruta_pruebas}",
     "senal_no_implementado": "No implementado"
   },
@@ -33,7 +56,8 @@
     "teléfono del cliente",
     "dirección de entrega",
     "documento de identidad",
-    "identificador de Telegram de una persona"
+    "identificador de Telegram de una persona",
+    "ubicación en tiempo real o historial de ubicaciones de un domiciliario"
   ],
   "reglas_criticas": [
     "Cada operación verifica en el backend el usuario, su rol, el negocio al que pertenece y sus permisos; nunca solo en el bot (contexto 3.2).",

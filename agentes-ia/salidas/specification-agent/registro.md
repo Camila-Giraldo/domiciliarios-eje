@@ -1,0 +1,35 @@
+# Registro de ejecuciones de Specification Agent
+
+- 2026-11-19 10:16 | SPEC-001 | versión 0.1 | Borrador | gemini-3.7-flash | borradores\SPEC-001\SPEC-001_v0.1.md | EPIC-001. Especifica el registro y la aprobación del negocio y la vinculación de su personal: una persona registra su ne
+- 2026-11-19 10:53 | SPEC-001 | versión 0.2 | Borrador | gemini-3.6-flash | borradores\SPEC-001\SPEC-001_v0.2.md | Respuestas del equipo a las preguntas de la SPEC-001: - OPEN-Q-001: el dueño de la plataforma registra un motivo obligat
+- 2026-11-19 11:00 | SPEC-001 | versión 1.0 | Candidata | gemini-3.7-flash | borradores\SPEC-001\SPEC-001_v1.0.md | Respuestas y correcciones del equipo para la SPEC-001: - OPEN-Q-010: las solicitudes pendientes de registro de negocio y
+- 2026-11-19 11:05 | SPEC-001 | versión 1.0 | Aprobada y congelada | ninguno (aprobación sin modelo) | aprobadas\SPEC-001_v1.0.md | El equipo aprueba la SPEC-001
+- 2026-11-19 11:16 | SPEC-002 | versión 0.1 | Borrador | gemini-3.7-flash | borradores\SPEC-002\SPEC-002_v0.1.md | EPIC-001. Especifica la configuración operativa de un negocio aprobado: el administrador configura los datos del negocio
+- 2026-11-19 11:22 | SPEC-002 | versión 1.0 | Candidata | gemini-3.5-flash-lite | borradores\SPEC-002\SPEC-002_v1.0.md | Respuestas del equipo a las preguntas de la SPEC-002: - OPEN-Q-001: el tope de pedidos simultáneos es 3 por defecto y el
+- 2026-11-19 11:25 | SPEC-001 | versión 1.1 | Candidata | gemini-3.5-flash | borradores\SPEC-001\SPEC-001_v1.1.md | Cambio solicitado por el equipo sobre la SPEC-001 aprobada: DEC-E42 (contexto 3.11) define que cada negocio tiene dos ac
+- 2026-11-21 15:09 | - | versión - | Sin encabezado de SPEC | gemini-3.5-flash | sin-clasificar\20261121-1509_sin-clasificar.md | SPEC-004. EPIC-002. Especifica el pedido del cliente de principio a fin hasta antes del despacho: ingreso por el acceso 
+- 2026-11-21 15:10 | SPEC-003 | versión 0.1 | Borrador | gemini-3.5-flash | borradores\SPEC-003\SPEC-003_v0.1.md | SPEC-003. EPIC-002. Especifica el catálogo de productos del negocio: el administrador y el empleado crean, modifican y d
+- 2026-11-21 15:10 | SPEC-004 | versión 0.1 | Borrador | gemini-3.5-flash | borradores\SPEC-004\SPEC-004_v0.1.md | SPEC-004. EPIC-002. Respuesta del equipo a la propuesta de división: se elige la opción B. El catálogo (HU-10) ya se esp
+- 2026-11-21 15:23 | SPEC-003 | versión 1.0 | Candidata | gemini-3.5-flash | borradores\SPEC-003\SPEC-003_v1.0.md | Respuestas del equipo a la SPEC-003: - OPEN-Q-001: el catálogo se organiza por categorías, que gestionan el administrado
+- 2026-11-21 15:24 | SPEC-004 | versión 1.0 | Candidata | gemini-3.5-flash | borradores\SPEC-004\SPEC-004_v1.0.md | Respuestas del equipo a la SPEC-004: - OPEN-Q-001: un posible duplicado es un pedido igual del mismo cliente al mismo ne
+- 2026-11-21 15:24 | SPEC-002 | versión 1.1 | Candidata | gemini-3.5-flash | borradores\SPEC-002\SPEC-002_v1.1.md | Cambio solicitado por el equipo sobre la SPEC-002 (Candidata v1.0): DEC-E51 y DEC-E53 (contexto 3.11) agregan a la confi
+- 2026-11-21 15:26 | SPEC-005 | versión 0.1 | Borrador | gemini-3.5-flash | borradores\SPEC-005\SPEC-005_v0.1.md | SPEC-005. EPIC-003. Especifica la asignación y el despacho de pedidos: el negocio marca listo para recoger (DEC-E21, DEC
+- 2026-11-21 15:28 | SPEC-006 | versión 0.1 | Borrador | gemini-3.5-flash | borradores\SPEC-006\SPEC-006_v0.1.md | SPEC-006. EPIC-004. Especifica el seguimiento de la entrega: paso a en camino por el domiciliario compartiendo su ubicac
+- 2026-11-21 15:29 | SPEC-007 | versión 0.1 | Borrador | gemini-3.5-flash | borradores\SPEC-007\SPEC-007_v0.1.md | SPEC-007. EPIC-005. Especifica el historial y los reportes del negocio: historial de pedidos filtrable por fecha, estado
+- 2026-11-21 15:35 | SPEC-005 | versión 1.0 | Candidata | gemini-3.5-flash | borradores\SPEC-005\SPEC-005_v1.0.md | Respuesta del equipo a la SPEC-005: OPEN-Q-001: el domiciliario tiene 3 minutos para aceptar o rechazar una asignación; 
+- 2026-11-21 15:35 | SPEC-007 | versión 1.0 | Candidata | gemini-3.5-flash | borradores\SPEC-007\SPEC-007_v1.0.md | Respuestas del equipo a la SPEC-007: - OPEN-Q-001: por defecto, el historial y los reportes muestran el día actual (DEC-
+- 2026-11-21 15:36 | SPEC-006 | versión 1.0 | Candidata | gemini-3.5-flash | borradores\SPEC-006\SPEC-006_v1.0.md | Respuestas del equipo a la SPEC-006: - OPEN-Q-001: novedades: cliente ausente, dirección no encontrada, cliente rechaza 
+- 2026-11-21 15:36 | SPEC-002 | versión 1.2 | Candidata | gemini-3.5-flash | borradores\SPEC-002\SPEC-002_v1.2.md | Cambio solicitado por el equipo sobre la SPEC-002 (Candidata v1.1): DEC-E57 (contexto 3.11) define que las formas de pag
+- 2026-11-21 15:39 | SPEC-002 | versión 1.3 | Candidata | ninguno (corrección manual) | borradores/SPEC-002/SPEC-002_v1.3.md | corrección manual de la revisión cruzada
+- 2026-11-21 15:39 | SPEC-003 | versión 1.1 | Candidata | ninguno (corrección manual) | borradores/SPEC-003/SPEC-003_v1.1.md | corrección manual de la revisión cruzada
+- 2026-11-21 15:39 | SPEC-004 | versión 1.1 | Candidata | ninguno (corrección manual) | borradores/SPEC-004/SPEC-004_v1.1.md | corrección manual de la revisión cruzada
+- 2026-11-21 15:39 | SPEC-005 | versión 1.1 | Candidata | ninguno (corrección manual) | borradores/SPEC-005/SPEC-005_v1.1.md | corrección manual de la revisión cruzada
+- 2026-11-21 15:39 | SPEC-006 | versión 1.1 | Candidata | ninguno (corrección manual) | borradores/SPEC-006/SPEC-006_v1.1.md | corrección manual de la revisión cruzada
+- 2026-11-21 15:39 | SPEC-007 | versión 1.1 | Candidata | ninguno (corrección manual) | borradores/SPEC-007/SPEC-007_v1.1.md | corrección manual de la revisión cruzada
+- 2026-11-21 15:55 | SPEC-001 | versión 1.1 | Aprobada y congelada | ninguno (aprobación sin modelo) | aprobadas\SPEC-001_v1.1.md | El equipo aprueba la SPEC-001
+- 2026-11-21 15:55 | SPEC-002 | versión 1.3 | Aprobada y congelada | ninguno (aprobación sin modelo) | aprobadas\SPEC-002_v1.3.md | El equipo aprueba la SPEC-002
+- 2026-11-21 15:55 | SPEC-003 | versión 1.1 | Aprobada y congelada | ninguno (aprobación sin modelo) | aprobadas\SPEC-003_v1.1.md | El equipo aprueba la SPEC-003
+- 2026-11-21 15:55 | SPEC-004 | versión 1.1 | Aprobada y congelada | ninguno (aprobación sin modelo) | aprobadas\SPEC-004_v1.1.md | El equipo aprueba la SPEC-004
+- 2026-11-21 15:55 | SPEC-005 | versión 1.1 | Aprobada y congelada | ninguno (aprobación sin modelo) | aprobadas\SPEC-005_v1.1.md | El equipo aprueba la SPEC-005
+- 2026-11-21 15:55 | SPEC-006 | versión 1.1 | Aprobada y congelada | ninguno (aprobación sin modelo) | aprobadas\SPEC-006_v1.1.md | El equipo aprueba la SPEC-006
+- 2026-11-21 15:55 | SPEC-007 | versión 1.1 | Aprobada y congelada | ninguno (aprobación sin modelo) | aprobadas\SPEC-007_v1.1.md | El equipo aprueba la SPEC-007
